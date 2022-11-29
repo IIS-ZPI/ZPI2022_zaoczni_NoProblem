@@ -1,5 +1,1 @@
-print('NAZWA_GRUPY No Problem, ID DanielWap, ID Developer ppatyk')
-
-
-
-
+print('NAZWA_GRUPY No Problem, GROUP LEADER ID DanielWap, DEVELOPER ID Hubertius, DEVELOPER ID 229258, DEVELOPER ID ppatyk, DEVOPS ID WiktorKwasniak')
