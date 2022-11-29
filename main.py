@@ -1,1 +1,1 @@
-print('NAZWA_GRUPY No Problem, ID DanielWap, WiktorKwasniak')
+print('NAZWA_GRUPY No Problem, ID DanielWap,  WiktorKwasniak')
