@@ -11,5 +11,6 @@ if operation == '+':
 elif operation == '-':
 
 elif operation == '*':
-
+    operator = MultiplyOperator()
+    print(operator.multiply(first_value, second_value))
 elif operation == '/':
