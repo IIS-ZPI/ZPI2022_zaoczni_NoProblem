@@ -9,7 +9,12 @@ if operation == '+':
     x = AddOperator()
     print(x.add(first_value, second_value))
 elif operation == '-':
-
+    0
 elif operation == '*':
-
+    0
 elif operation == '/':
+    x = DivisionOperator()
+    try:
+        print(x.divide(first_value, second_value))
+    except Exception as inst:
+        print(inst)
