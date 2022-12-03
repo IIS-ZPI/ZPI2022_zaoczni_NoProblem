@@ -16,4 +16,8 @@ elif operation == '-':
 elif operation == '*':
     pass
 elif operation == '/':
-    pass
+    x = DivisionOperator()
+    try:
+        print(x.divide(first_value, second_value))
+    except Exception as inst:
+        print(inst)
