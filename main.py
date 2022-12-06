@@ -14,11 +14,11 @@ operation = input('Choose your operation: ')
 #    * multiplication
 #    * division
 operations = {
-    '+': AddOperator().add(first_value, second_value),
-    '-': DiffOperator().diff(first_value, second_value),
-    '*': MultiplyOperator().multiply(first_value, second_value),
-    '/': DivisionOperator().divide(first_value, second_value),
-    'a': AbsOperator().abs(first_value, second_value)
+    '+': AddOperator().add(first_value, second_value), #dodawanie
+    '-': DiffOperator().diff(first_value, second_value), #roznica
+    '*': MultiplyOperator().multiply(first_value, second_value), #mnozenie
+    '/': DivisionOperator().divide(first_value, second_value), #dzielenie
+    'a': AbsOperator().abs(first_value, second_value) #abs
 }
 
 print(operations.get(operation, 'Unknown operation'))
