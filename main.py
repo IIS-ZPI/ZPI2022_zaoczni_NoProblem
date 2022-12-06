@@ -5,7 +5,7 @@ print('NAZWA_GRUPY No Problem, GROUP LEADER ID DanielWap, DEVELOPER ID Hubertius
 first_value = int(input('Enter first value: '))
 second_value = int(input('Enter second value: '))
 operation = input('Choose your operation: ')
-
+#Hubertius_1
 operations = {
     '+': AddOperator().add(first_value, second_value),
     '-': DiffOperator().diff(first_value, second_value),
