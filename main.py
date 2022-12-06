@@ -17,7 +17,8 @@ operations = {
     '+': AddOperator().add(first_value, second_value),
     '-': DiffOperator().diff(first_value, second_value),
     '*': MultiplyOperator().multiply(first_value, second_value),
-    '/': DivisionOperator().divide(first_value, second_value)
+    '/': DivisionOperator().divide(first_value, second_value),
+    'a': AbsOperator().abs(first_value, second_value)
 }
 
 print(operations.get(operation, 'Unknown operation'))
