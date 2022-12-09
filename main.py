@@ -1,7 +1,5 @@
 from Arithmetic import *
 
-# Main class for arithmetic operations
-
 print('NAZWA_GRUPY No Problem, GROUP LEADER ID DanielWap, DEVELOPER ID Hubertius, DEVELOPER ID 229258, DEVELOPER ID ppatyk, DEVOPS ID WiktorKwasniak')
 
 first_value = int(input('Enter first value: '))
