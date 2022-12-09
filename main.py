@@ -8,11 +8,6 @@ first_value = int(input('Enter first value: '))
 second_value = int(input('Enter second value: '))
 operation = input('Choose your operation: ')
 
-#dictionary of possible operations, current options:
-#    * addition
-#    * substraction
-#    * multiplication
-#    * division
 operations = {
     '+': AddOperator().add(first_value, second_value), #dodawanie
     '-': DiffOperator().diff(first_value, second_value), #roznica
