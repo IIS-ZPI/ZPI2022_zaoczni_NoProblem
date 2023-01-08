@@ -7,7 +7,7 @@ class TableName(enum.Enum):
     C = "C"
 
 
-class Period(enum.Enum):
+class Period(str, enum.Enum):
     WEEK = "week",
     TWO_WEEKS = "two_weeks",
     MONTH = "month",

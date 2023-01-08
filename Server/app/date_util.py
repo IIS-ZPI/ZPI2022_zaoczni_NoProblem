@@ -1,7 +1,7 @@
 from datetime import *
 from dateutil.relativedelta import *
 
-from nbp_enums import Period
+from .nbp_enums import Period
 
 
 class DateUtil:

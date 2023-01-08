@@ -1,7 +1,7 @@
 import json
 import requests
-from date_util import DateUtil
-from nbp_enums import Period
+from .date_util import DateUtil
+from .nbp_enums import Period
 
 
 class NBPClient:
@@ -39,6 +39,7 @@ class NBPClient:
             request += str(start_date) + f"/{calendar.end_date.date()}"
         http_response = requests.get(url=request, params=dict(), headers=self.header_content_type_json)
         if http_response.status_code == 200:
-            return http_response.json()
+            json_result = http_response.json()
+            return [{'no': currency.get('no'), 'effectiveDate': currency.get('effectiveDate'), 'rate': currency.get('mid')} for currency in json_result.get('rates')]
         else:
             return None
