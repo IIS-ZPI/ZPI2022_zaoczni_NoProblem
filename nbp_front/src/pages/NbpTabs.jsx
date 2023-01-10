@@ -3,23 +3,24 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import Alert from 'react-bootstrap/Alert';
 
-import CurrentRate from "./../pages/CurrentRate";
-import SelectCurrency from "./../pages/SelectCurrency";
+import CurrentRate from "./CurrentRate";
+import SelectCurrency from "./SelectCurrency";
 
 function NbpTabs({ setIsProcessing }) {
 
+    const [query, setQuery] = useState(null);
 
     return (
         <>
             <Tabs id="NbpTabs" className='mb-3' justify>
                 <Tab eventKey="tab1" title="Analiza waluty">
-                    <CurrentRate setIsProcessing={true} currencyCode="USD" />
-                    <SelectCurrency setIsProcessing={true} />
+                    <SelectCurrency setIsProcessing={true} onQuery={setQuery} />
+                    <CurrentRate setIsProcessing={true} query={query} />
                 </Tab>
+
                 <Tab eventKey="tab2" title="Zestawienie">
                     <Alert variant="info">Placeholder for Tab2</Alert>
                 </Tab>
-
             </Tabs>
         </>
     )

@@ -1,33 +1,38 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
-function CurrentRate({ setIsProcessing, currencyCode }) {
+function CurrentRate({ setIsProcessing, currencyCode, query }) {
 
     const [currencies, setCurrencies] = useState([]);
     const [rates, setRates] = useState([]);
+    const [details, setDetails] = useState([]);
 
     const fetchData = async () => {
-        var response = await fetch(
-            'http://api.nbp.pl/api/exchangerates/rates/a/' + currencyCode.toLowerCase());
+        var response;
+        if (query) {
+            response = await fetch('//api.nbp.pl/api/exchangerates/rates/a/' + query.toLowerCase());
 
-        if (!response.ok) {
-            console.log("errorrr");
+            if (!response.ok) {
+                console.log("errorrr");
+            }
+            var data = await response.json();
+            setCurrencies(data);
+            setRates([data.rates[0].effectiveDate, data.rates[0].mid]);
+
+            setIsProcessing = false;
         }
-        var data = await response.json();
-        setCurrencies(data);
-        setRates([data.rates[0].effectiveDate, data.rates[0].mid]);
-
-        setIsProcessing = false;
     };
 
     useEffect(() => {
         setIsProcessing = true;
         fetchData();
-    }, []);
+    }, [query]);
 
     useEffect(() => {
-
-    }, [rates]);
+        // let details = DataHolder.setData();
+        // if (details)
+        //     console("->" + details);
+    }, [rates, details]);
 
     return (
         <div>
