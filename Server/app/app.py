@@ -1,6 +1,7 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import json
+import statistics
 from .nbp_enums import TableName, Period
 from .nbp_client import NBPClient
 
@@ -32,7 +33,32 @@ def get_table_currencies(table_name: TableName):
 
 @app.get("/currencies/{table_name}/{code}/{period}")
 def get_single_currency_rates(table_name: TableName, code: str, period: Period):
-    nbp_client = NBPClient()
+    response = get_response_for_currency(table_name, code, period)
+    if get_response_for_currency(table_name, code, period) is not None:
+        return response
+    raise HTTPException(status_code=404, detail=f"Error, rates not found for period '{period}' and table "
+                                                f"'{table_name.value}' with currency code '{code}'")
+
+@app.get("/math_ops/{table_name}/{code}/{period}")  # mediana
+def get_single_currency_rates_math_ops(table_name: TableName, code: str, period: Period):
+    response = get_response_for_currency(table_name, code, period)
+    if get_response_for_currency(table_name, code, period) is not None:
+        rates = [element.get("rate") for element in response]
+        rounded_rates = [round(element, 2) for element in rates]
+        mean = statistics.mean(rates)
+        st_deviation = statistics.stdev(rates)
+        mode = statistics.mode(rounded_rates)
+        rates.sort()
+        median = statistics.median(rates)
+        return {"median": median,
+                "standard_deviation": st_deviation,
+                "mode": mode,
+                "cv": (st_deviation/mean)*100}
+    raise HTTPException(status_code=404, detail=f"Error, rates not found for period '{period}' and table "
+                                                f"'{table_name.value}' with currency code '{code}'")
+
+
+def get_response_for_currency(table_name: TableName, code: str, period: Period):
     tables_names = [table_name.value.lower() for member in TableName]
     if table_name.value.lower() in tables_names:
         if table_name.value.lower() != TableName.A.value.lower():
@@ -40,10 +66,11 @@ def get_single_currency_rates(table_name: TableName, code: str, period: Period):
         periods_enum_values = [member.lower() for member in Period]
         if period.value.lower() not in periods_enum_values:
             period = None
+        nbp_client = NBPClient()
         response = nbp_client.get_single_currency_data(table_name.value, code, period)
-        if response is not None:
-            return response
-    raise HTTPException(status_code=404, detail=f"Error, rates not found for period {period} and {table_name}")
+        return response
+
+
 @app.websocket("/ws/")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
